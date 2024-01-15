@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 using QList;
 using QList.OptionTypes;
 
-[assembly: MelonInfo(typeof(DevToolsMod), "DevTools", "0.0.1", "dodad")]
+[assembly: MelonInfo(typeof(DevToolsMod), "DevTools", "0.1.0", "dodad")]
 [assembly: MelonGame("Bohemia Interactive", "Silica")]
 [assembly: MelonOptionalDependencies("QList")]
 
