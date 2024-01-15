@@ -21,7 +21,6 @@ public class DevToolsMod : MelonMod
     };
 
     public static DevToolsMod? instance;
-    //internal static BoolOption? AlienCommanderAI, SolCommanderAI, CentauriCommanderAI;
     internal static Dictionary<string, BoolOption>? TeamOptions = new();
 
     private bool QListPresent() => RegisteredMelons.Any(m => m.Info.Name == "QList");
@@ -44,6 +43,7 @@ public class DevToolsMod : MelonMod
 
         var generalCategory = MelonPreferences.CreateCategory("General");
         generalCategory.SetFilePath(PreferencesConfig.filePath);
+
     }
 
     [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]

@@ -11,6 +11,7 @@ A small collection of tools to change elements of the game
 # Tools
 
 - Toggle commander AI per team
+- Bundle manager
 
 # Changelog
 

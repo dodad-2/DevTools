@@ -3,7 +3,7 @@ using QList;
 
 namespace DevTools;
 
-public static class Log // TODO rewrite this
+internal static class Log // TODO rewrite this
 {
     internal static LogLevel logLevel = LogLevel.None;
     internal static MelonMod? mod;
