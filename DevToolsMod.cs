@@ -1,11 +1,9 @@
 ﻿using MelonLoader;
 using DevTools;
-using UnityEngine.SceneManagement;
 using System.Runtime.CompilerServices;
-using QList;
 using QList.OptionTypes;
 
-[assembly: MelonInfo(typeof(DevToolsMod), "DevTools", "0.1.0", "dodad")]
+[assembly: MelonInfo(typeof(DevToolsMod), "DevTools", "0.2.0", "dodad")]
 [assembly: MelonGame("Bohemia Interactive", "Silica")]
 [assembly: MelonOptionalDependencies("QList")]
 
@@ -25,6 +23,16 @@ public class DevToolsMod : MelonMod
 
     private bool QListPresent() => RegisteredMelons.Any(m => m.Info.Name == "QList");
 
+    public override void OnUpdate()
+    {
+        if (RebindCheats.Rebind.TimeScaleOption == null)
+            return;
+
+        if (RebindCheats.Rebind.AddTime)
+            Il2Cpp.WorldLight.SetDayTime(Il2Cpp.WorldLight.GetDayTime() + RebindCheats.Rebind.TimeScaleOption.GetValue());
+        if (RebindCheats.Rebind.SubtractTime)
+            Il2Cpp.WorldLight.SetDayTime(Il2Cpp.WorldLight.GetDayTime() - RebindCheats.Rebind.TimeScaleOption.GetValue());
+    }
     public override void OnLateInitializeMelon()
     {
         if (!QListPresent())
@@ -68,6 +76,8 @@ public class DevToolsMod : MelonMod
         TeamOptions.Add(Il2Cpp.Team.GetTeamByName(TeamNames[0]).name, alienCommanderAI);
         TeamOptions.Add(Il2Cpp.Team.GetTeamByName(TeamNames[1]).name, centauriCommanderAI);
         TeamOptions.Add(Il2Cpp.Team.GetTeamByName(TeamNames[2]).name, solCommanderAI);
+
+        RebindCheats.Rebind.CreateOptions();
     }
     public static void ToggleAlienCommander(QList.OptionTypes.BoolOption option)
     {
