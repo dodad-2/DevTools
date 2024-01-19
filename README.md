@@ -17,7 +17,7 @@ A small collection of tools to change elements of the game
 
 # Changelog
 
-**0.2.1**
+**0.3.0**
 
 - Added spawn unit at cursor function
 
