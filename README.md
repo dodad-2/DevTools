@@ -13,12 +13,17 @@ A small collection of tools to change elements of the game
 - Toggle commander AI per team
 - Bundle loader
 - Numpad control bindings (does not change the game's bindings)
+- Spawn unit at cursor
 
 # Changelog
 
+**0.2.1**
+
+- Added spawn unit at cursor function
+
 **0.2.0**
 
-- Added Numpad cheat bindings
+- Added numpad cheat bindings
 
 **0.1.0**
 
