@@ -19,15 +19,15 @@ A small collection of tools to change elements of the game
 
 **0.3.0**
 
-- Added spawn unit at cursor function
+- Tool: Spawn unit at cursor
 
 **0.2.0**
 
-- Added numpad cheat bindings
+- Tool: Numpad cheat bindings
 
 **0.1.0**
 
-- Added bundle tool
+- Tool: Bundle manager
 
 **0.0.1**
 
