@@ -30,7 +30,8 @@ public static class Rebind
                 category.Identifier,
                 "PLAYPAUSE",
                 "",
-                "Play / Pause Time"
+                "Play / Pause Time",
+                "Cheats required"
             )
         );
         playPauseKeybind.OnKeybindDown += new Action<KeybindOption>(ToggleTime);
@@ -51,7 +52,13 @@ public static class Rebind
         QList.Options.AddOption(TimeScaleOption);
 
         addTimeKeybind = new QList.OptionTypes.KeybindOption(
-            MelonPreferences.CreateEntry<string>(category.Identifier, "ADDTIME", "", "Add Time")
+            MelonPreferences.CreateEntry<string>(
+                category.Identifier,
+                "ADDTIME",
+                "",
+                "Add Time",
+                "Cheats required"
+            )
         );
         addTimeKeybind.OnKeybindDown += new Action<KeybindOption>(StartAddTime);
         addTimeKeybind.OnKeybindUp += new Action<KeybindOption>(StopAddTime);
@@ -62,7 +69,8 @@ public static class Rebind
                 category.Identifier,
                 "SUBTRACTTIME",
                 "",
-                "Subtract Time"
+                "Subtract Time",
+                "Cheats required"
             )
         );
         subtractTimeKeybind.OnKeybindDown += new Action<KeybindOption>(StartSubtractTime);
@@ -81,14 +89,19 @@ public static class Rebind
             )
         );
         spawnUnitKeybind.OnKeybindDown += new Action<KeybindOption>(SpawnUnit);
-        QList.Options.AddOption(spawnUnitKeybind, "Spawn Unit Keybind", null, "Cheat Assists");
+        QList.Options.AddOption(
+            spawnUnitKeybind,
+            "Spawn Unit Keybind",
+            "Cheats required",
+            "Cheat Assists"
+        );
 
         category.SaveToFile();
     }
 
     public static void ToggleTime(KeybindOption option)
     {
-        if (Il2Cpp.GameManager.Instance == null)
+        if (Il2Cpp.GameManager.Instance == null || !Game.CheatsEnabled)
             return;
 
         if (!keybindPaused)
@@ -104,27 +117,39 @@ public static class Rebind
 
     public static void StartAddTime(KeybindOption option)
     {
+        if (!Game.CheatsEnabled)
+            return;
+
         AddTime = true;
     }
 
     public static void StopAddTime(KeybindOption option)
     {
+        if (!Game.CheatsEnabled)
+            return;
+
         AddTime = false;
     }
 
     public static void StartSubtractTime(KeybindOption option)
     {
+        if (!Game.CheatsEnabled)
+            return;
+
         SubtractTime = true;
     }
 
     public static void StopSubtractTime(KeybindOption option)
     {
+        if (!Game.CheatsEnabled)
+            return;
+
         SubtractTime = false;
     }
 
     public static void SpawnUnit(KeybindOption option)
     {
-        if (spawnUnitString == null)
+        if (spawnUnitString == null || !Game.CheatsEnabled)
             return;
 
         var prefabIndex = GameDatabase.GetSpawnablePrefabIndex(spawnUnitString.GetValue());

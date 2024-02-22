@@ -5,8 +5,11 @@ using HarmonyLib;
 [HarmonyPatch("Il2CppSilica.AI.AIManager", "EnableCommander")]
 internal static class AI_Patch_Il2CppSilica_AI_AIManager_EnableCommander
 {
-    public static void Prefix(Il2Cpp.Team team, ref bool enable) // this is not being called, find an entry point
+    public static void Prefix(Il2Cpp.Team team, ref bool enable)
     {
+        if (!Il2Cpp.Game.CheatsEnabled)
+            return;
+
         if (
             enable
             && Il2Cpp.GameMode.CurrentGameMode != null

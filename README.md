@@ -10,12 +10,20 @@ A small collection of tools to change elements of the game
 
 # Tools
 
-- Toggle commander AI per team
-- Bundle loader
+- Auto rotate building placement (approved by Dram)
+- Rebuild last structure on key press (approved by Dram)
+- Toggle commander AI per team - Broken for some
 - Numpad control bindings (does not change the game's bindings)
 - Spawn unit at cursor
+- Bundle loader (for modders)
 
 # Changelog
+
+**0.4.0**
+
+- Tool: Auto rotate construction on key hold
+- Tool: Rebuild last structure on key press
+- Fix: Added descriptions to tools that require cheats
 
 **0.3.0**
 

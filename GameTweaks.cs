@@ -62,7 +62,11 @@ public static class Main
     #region ReProduce
     private static void ReProduce(KeybindOption option)
     {
-        if (LastProduction == null)
+        if (
+            LastProduction == null
+            || Player.CurrentPlayer == null
+            || !Player.CurrentPlayer.IsCommander
+        )
             return;
 
         LastProduction.Produce();
@@ -106,6 +110,9 @@ public static class Main
 
     private static void EnableAutoRotate(KeybindOption option)
     {
+        if (Player.CurrentPlayer == null || !Player.CurrentPlayer.IsCommander)
+            return;
+
         AutoRotate = true;
     }
 

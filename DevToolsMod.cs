@@ -3,7 +3,7 @@ using DevTools;
 using MelonLoader;
 using QList.OptionTypes;
 
-[assembly: MelonInfo(typeof(DevToolsMod), "DevTools", "0.3.0", "dodad")]
+[assembly: MelonInfo(typeof(DevToolsMod), "DevTools", "0.4.0", "dodad")]
 [assembly: MelonGame("Bohemia Interactive", "Silica")]
 [assembly: MelonOptionalDependencies("QList")]
 
@@ -79,9 +79,19 @@ public class DevToolsMod : MelonMod
             ToggleSolCommander
         );
 
-        QList.Options.AddOption(alienCommanderAI, "Alien Commander", null, "Commander AI");
-        QList.Options.AddOption(centauriCommanderAI, "Centauri Commander", null, "Commander AI");
-        QList.Options.AddOption(solCommanderAI, "Sol Commander", null, "Commander AI");
+        QList.Options.AddOption(
+            alienCommanderAI,
+            "Alien Commander",
+            "Cheats required",
+            "Commander AI"
+        );
+        QList.Options.AddOption(
+            centauriCommanderAI,
+            "Centauri Commander",
+            "Cheats required",
+            "Commander AI"
+        );
+        QList.Options.AddOption(solCommanderAI, "Sol Commander", "Cheats required", "Commander AI");
 
         TeamOptions.Add(Il2Cpp.Team.GetTeamByName(TeamNames[0]).name, alienCommanderAI);
         TeamOptions.Add(Il2Cpp.Team.GetTeamByName(TeamNames[1]).name, centauriCommanderAI);
