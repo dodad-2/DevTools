@@ -1,26 +1,23 @@
+using System.Reflection;
 using Il2CppInterop.Runtime;
+using MelonLoader;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Reflection;
-using MelonLoader;
 
 namespace DevTools;
 
-public static class Resources // TODO rewrite this
+public static class Resources
 {
-    //internal static Dictionary<string, Texture2D>? bundleTextures;
-
     #region Variables
     private static Dictionary<string, Il2CppAssetBundle>? BundleHash { get; set; }
     #endregion
 
     #region Bundles
     /// <summary>
-    /// Makes bundles available to other mods
-    /// <param name="bundleName">Bundle Name</parameter>
-    /// <param name="bundleKey">Used for GetBundle</parameter>
+    /// Loads in a bundle by name and makes it available via key
+    /// <param name="bundleName">Example: QList.qlist_bundle</parameter>
     /// </summary>
-    public static bool RegisterBundle(MelonMod mod, string bundleName)
+    public static bool RegisterBundle(string bundleName)
     {
         Assembly assembly = System.Reflection.Assembly.GetCallingAssembly();
 
@@ -30,14 +27,22 @@ public static class Resources // TODO rewrite this
             return false;
         }
 
-        if (BundleHash == null)
-            BundleHash = new Dictionary<string, Il2CppAssetBundle>();
+        BundleHash ??= new Dictionary<string, Il2CppAssetBundle>();
+
+        if (BundleHash.ContainsKey(bundleName))
+        {
+            Log.LogOutput($"RegisterBundle: {bundleName} already registered");
+            return false;
+        }
 
         try
         {
             Il2CppAssetBundle? bundle = null;
 
-            Log.LogOutput($"RegisterBundle: Loading '{bundleName}' from assembly '{assembly.FullName}'", Log.LogLevel.Debug);
+            Log.LogOutput(
+                $"RegisterBundle: Loading '{bundleName}' from assembly '{assembly.FullName}'",
+                Log.LogLevel.Debug
+            );
 
             foreach (string fileName in assembly.GetManifestResourceNames())
                 Log.LogOutput($"RegisterBundle: Resource name: {fileName}", Log.LogLevel.Debug);
@@ -56,12 +61,18 @@ public static class Resources // TODO rewrite this
 
             if (bundle == null)
             {
-                Log.LogOutput($"RegisterBundle: Unable to load '{bundleName}'.", Log.LogLevel.Warning);
+                Log.LogOutput(
+                    $"RegisterBundle: Unable to load '{bundleName}'.",
+                    Log.LogLevel.Warning
+                );
             }
             else
             {
                 BundleHash.Add(bundleName, bundle);
-                Log.LogOutput($"RegisterBundle: Registered bundle '{bundleName}'", Log.LogLevel.Info);
+                Log.LogOutput(
+                    $"RegisterBundle: Registered bundle '{bundleName}'",
+                    Log.LogLevel.Info
+                );
             }
         }
         catch (Exception e)
@@ -72,6 +83,7 @@ public static class Resources // TODO rewrite this
 
         return true;
     }
+
     public static Il2CppAssetBundle? GetBundle(string key)
     {
         if (key == null || key.Length == 0)
@@ -113,6 +125,7 @@ public static class Resources // TODO rewrite this
 
         return GetTexturesFromBundle(BundleHash[name]);
     }
+
     public static Dictionary<string, Texture2D>? GetTexturesFromBundle(Il2CppAssetBundle? bundle)
     {
         if (bundle == null)

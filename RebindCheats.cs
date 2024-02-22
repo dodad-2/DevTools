@@ -1,7 +1,7 @@
-using QList.OptionTypes;
 using DevTools;
-using MelonLoader;
 using Il2Cpp;
+using MelonLoader;
+using QList.OptionTypes;
 using UnityEngine;
 
 namespace DevTools.RebindCheats;
@@ -25,19 +25,46 @@ public static class Rebind
         var category = MelonPreferences.CreateCategory("Cheat Rebind Fix");
         category.SetFilePath(PreferencesConfig.filePath);
 
-        playPauseKeybind = new QList.OptionTypes.KeybindOption(MelonPreferences.CreateEntry<string>(category.Identifier, "PLAYPAUSE", "", "Play / Pause Time"));
+        playPauseKeybind = new QList.OptionTypes.KeybindOption(
+            MelonPreferences.CreateEntry<string>(
+                category.Identifier,
+                "PLAYPAUSE",
+                "",
+                "Play / Pause Time"
+            )
+        );
         playPauseKeybind.OnKeybindDown += new Action<KeybindOption>(ToggleTime);
         QList.Options.AddOption(playPauseKeybind);
 
-        TimeScaleOption = new FloatOption(MelonPreferences.CreateEntry<float>(category.Identifier, "TIMESCALE", 0.5f, "Add / Subtract Time Speed"), true, 0.5f, 0.01f, 4f);
+        TimeScaleOption = new FloatOption(
+            MelonPreferences.CreateEntry<float>(
+                category.Identifier,
+                "TIMESCALE",
+                0.5f,
+                "Add / Subtract Time Speed"
+            ),
+            true,
+            0.5f,
+            0.01f,
+            4f
+        );
         QList.Options.AddOption(TimeScaleOption);
 
-        addTimeKeybind = new QList.OptionTypes.KeybindOption(MelonPreferences.CreateEntry<string>(category.Identifier, "ADDTIME", "", "Add Time"));
+        addTimeKeybind = new QList.OptionTypes.KeybindOption(
+            MelonPreferences.CreateEntry<string>(category.Identifier, "ADDTIME", "", "Add Time")
+        );
         addTimeKeybind.OnKeybindDown += new Action<KeybindOption>(StartAddTime);
         addTimeKeybind.OnKeybindUp += new Action<KeybindOption>(StopAddTime);
         QList.Options.AddOption(addTimeKeybind);
 
-        subtractTimeKeybind = new QList.OptionTypes.KeybindOption(MelonPreferences.CreateEntry<string>(category.Identifier, "SUBTRACTTIME", "", "Subtract Time"));
+        subtractTimeKeybind = new QList.OptionTypes.KeybindOption(
+            MelonPreferences.CreateEntry<string>(
+                category.Identifier,
+                "SUBTRACTTIME",
+                "",
+                "Subtract Time"
+            )
+        );
         subtractTimeKeybind.OnKeybindDown += new Action<KeybindOption>(StartSubtractTime);
         QList.Options.AddOption(subtractTimeKeybind);
         subtractTimeKeybind.OnKeybindUp += new Action<KeybindOption>(StopSubtractTime);
@@ -45,7 +72,14 @@ public static class Rebind
         spawnUnitString = new StringOption();
         QList.Options.AddOption(spawnUnitString, "Spawn Unit Name", null, "Cheat Assists");
 
-        spawnUnitKeybind = new KeybindOption(MelonPreferences.CreateEntry<string>(category.Identifier, "SPAWNUNITKEYBIND", "", "Spawn Unit Keybind"));
+        spawnUnitKeybind = new KeybindOption(
+            MelonPreferences.CreateEntry<string>(
+                category.Identifier,
+                "SPAWNUNITKEYBIND",
+                "",
+                "Spawn Unit Keybind"
+            )
+        );
         spawnUnitKeybind.OnKeybindDown += new Action<KeybindOption>(SpawnUnit);
         QList.Options.AddOption(spawnUnitKeybind, "Spawn Unit Keybind", null, "Cheat Assists");
 
@@ -67,22 +101,27 @@ public static class Rebind
 
         Il2Cpp.GameManager.Instance.Time_TargetScale = keybindPaused ? 0 : previousTimeScale;
     }
+
     public static void StartAddTime(KeybindOption option)
     {
         AddTime = true;
     }
+
     public static void StopAddTime(KeybindOption option)
     {
         AddTime = false;
     }
+
     public static void StartSubtractTime(KeybindOption option)
     {
         SubtractTime = true;
     }
+
     public static void StopSubtractTime(KeybindOption option)
     {
         SubtractTime = false;
     }
+
     public static void SpawnUnit(KeybindOption option)
     {
         if (spawnUnitString == null)
@@ -106,7 +145,15 @@ public static class Rebind
 
             var cross = Vector3.Cross(Game.CurrentCamera.transform.right, Vector3.up);
 
-            Game.SpawnPrefab(prefab, null, Player.CurrentPlayer.Team, position, Quaternion.LookRotation(cross), true, true);
+            Game.SpawnPrefab(
+                prefab,
+                null,
+                Player.CurrentPlayer.Team,
+                position,
+                Quaternion.LookRotation(cross),
+                true,
+                true
+            );
         }
     }
 }
