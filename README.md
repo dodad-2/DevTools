@@ -17,7 +17,7 @@ A small collection of tools to change elements of the game
 - Spawn unit at cursor
 - Bundle loader (for modders)
 
-* Will eventually be moved to a standalone mod
+\* Will eventually be moved to a standalone mod
 
 # Changelog
 
