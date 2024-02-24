@@ -3,7 +3,7 @@ using DevTools;
 using MelonLoader;
 using QList.OptionTypes;
 
-[assembly: MelonInfo(typeof(DevToolsMod), "DevTools", "0.4.0", "dodad")]
+[assembly: MelonInfo(typeof(DevToolsMod), "DevTools", "0.4.1", "dodad")]
 [assembly: MelonGame("Bohemia Interactive", "Silica")]
 [assembly: MelonOptionalDependencies("QList")]
 
@@ -106,12 +106,12 @@ public class DevToolsMod : MelonMod
         SetCommanderStateForTeam(TeamNames[0], option.GetValue());
     }
 
-    public static void ToggleSolCommander(QList.OptionTypes.BoolOption option)
+    public static void ToggleCentauriCommander(QList.OptionTypes.BoolOption option)
     {
         SetCommanderStateForTeam(TeamNames[1], option.GetValue());
     }
 
-    public static void ToggleCentauriCommander(QList.OptionTypes.BoolOption option)
+    public static void ToggleSolCommander(QList.OptionTypes.BoolOption option)
     {
         SetCommanderStateForTeam(TeamNames[2], option.GetValue());
     }
